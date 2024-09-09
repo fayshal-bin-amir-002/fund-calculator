@@ -14,12 +14,12 @@ const Form = () => {
                     <label className="text-xl font-medium">Type : </label>
                     <div className="flex w-2/3 justify-start items-center gap-12">
                         <div>
-                            <input type="radio" name="type" id="type" value="income" className="mr-2" />
-                            <label htmlFor="type">Income</label>
+                            <input type="radio" name="type" id="type1" value="income" className="mr-2" />
+                            <label htmlFor="type1">Income</label>
                         </div>
                         <div>
-                            <input type="radio" name="type" id="type" value="expense" className="mr-2" />
-                            <label htmlFor="type">Expense</label>
+                            <input type="radio" name="type" id="type2" value="expense" className="mr-2" />
+                            <label htmlFor="type2">Expense</label>
                         </div>
                     </div>
                 </div>
