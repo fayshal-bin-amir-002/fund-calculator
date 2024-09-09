@@ -1,7 +1,13 @@
 const Form = () => {
+
+    const handleFundForm = (e) => {
+        e.preventDefault();
+        console.log('hi');
+    }
+
     return (
         <div className="p-4 md:p-6 py-4 md:py-6">
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleFundForm}>
                 <div className="flex justify-between items-center">
                     <label htmlFor="text" className="text-xl font-medium">Text : </label>
                     <input type="text" name="text" id="text" className="border border-sky-400 p-2 rounded-lg w-2/3" placeholder="Type your text here..." />
@@ -23,8 +29,9 @@ const Form = () => {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <button className="w-full p-3 bg-sky-200 text-lg font-medium rounded-lg hover:scale-105 duration-500">Add Fund</button>
+                <div className="flex justify-between items-center gap-6">
+                    <input className="w-full p-3 bg-red-200 text-lg font-medium rounded-lg hover:scale-105 duration-500 text-center cursor-pointer focus:outline-none focus:border-0 focus:ring-0 hover:bg-red-400" readOnly defaultValue={'Reset'} />
+                    <button type="submit" className="w-full p-3 bg-sky-200 text-lg font-medium rounded-lg hover:scale-105 duration-500 hover:bg-sky-400">Add Fund</button>
                 </div>
             </form>
         </div>
