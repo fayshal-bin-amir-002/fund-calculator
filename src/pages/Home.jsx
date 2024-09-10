@@ -18,7 +18,7 @@ const Home = () => {
             { user?.role === 'admin' && <Form></Form>}
             <Transitions></Transitions>
             <div className="absolute top-0 right-0 z-50">
-                <button onClick={handleLogOut} className="p-1 bg-red-400 rounded-lg text-white font-semibold">Logout</button>
+                <button onClick={handleLogOut} className="px-1.5 py-1 bg-red-400 rounded-lg text-white font-medium">Logout</button>
             </div>
         </div>
     );
