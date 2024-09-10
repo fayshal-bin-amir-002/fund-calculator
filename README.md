@@ -1,8 +1,10 @@
-# React + Vite
+# Fund Calculator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Fund calculator is a kind of calculator which can calculate our income or expense in out daily life or for a certain organization, specially i made it for my class. By this you can calculate all adding money and expense with detailed data. I have made for my university class fund, so i kept user login using a certain organization or a root email.
+Author of the organization can add, update or remove fund data. Here author will find all months data.
 
-Currently, two official plugins are available:
+# Technologies
+- React, Tailwind css, Redux, Node js, Express js, mongodb
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+[Live Link](https://fund-calculator.netlify.app)
