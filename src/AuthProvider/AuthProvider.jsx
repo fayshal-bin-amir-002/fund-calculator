@@ -57,7 +57,7 @@ const AuthProvider = ({ children }) => {
         setDate(date);
     },[]);
 
-    const authData = { user, org, date, setDate, loading, userLogin, userLogout }
+    const authData = { user, org, date, setDate, loading, setLoading, userLogin, userLogout }
 
     return (
         <AuthContext.Provider value={authData}>

@@ -5,7 +5,7 @@ import { CgSpinnerTwo } from "react-icons/cg";
 
 const Login = () => {
 
-    const { user, userLogin, loading } = useContext(AuthContext);
+    const { user, userLogin, loading, setLoading } = useContext(AuthContext);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -13,6 +13,8 @@ const Login = () => {
         const email = form.email.value;
         const org_email = form.org_email.value;
         await userLogin(org_email, email);
+        setLoading(false);
+        form.reset();
     }
 
     if (user) return <Navigate to={"/"}></Navigate>
