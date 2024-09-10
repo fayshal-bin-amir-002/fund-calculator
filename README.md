@@ -6,5 +6,10 @@ Author of the organization can add, update or remove fund data. Here author will
 # Technologies
 - React, Tailwind css, Redux, Node js, Express js, mongodb
 
+# Author Email & Organization Email
+- author : 1@gmail.com
+- user : 2@gmail.com
+- organization email : demo@gmail.com
+
 
 [Live Link](https://fund-calculator.netlify.app)
