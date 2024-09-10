@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { getTransactions } from "./transactionApi"
+import { addTransactions, getTransactions } from "./transactionApi"
 
 const initialState = {
     transactions: [],
@@ -12,6 +12,13 @@ export const fetchTransactions = createAsyncThunk("transaction/fetchTransactions
     async ({ date, org_email }) => {
         const transactions = await getTransactions({ date, org_email });
         return transactions;
+    }
+)
+
+export const addedTransaction = createAsyncThunk("transaction/addedTransaction",
+    async ({ date, org_email, trans, email }) => {
+        const transaction = await addTransactions({ date, org_email, trans, email });
+        return transaction;
     }
 )
 
@@ -34,6 +41,20 @@ const transactionSlice = createSlice({
                 state.isError = true;
                 state.error = action.error?.message;
                 state.transactions = [];
+            })
+            .addCase(addedTransaction.pending, (state) => {
+                state.error = ''
+                state.isError = false;
+                state.isLoading = true;
+            })
+            .addCase(addedTransaction.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.transactions.push(action.payload)
+            })
+            .addCase(addedTransaction.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.error = action.error?.message;
             })
     }
 })

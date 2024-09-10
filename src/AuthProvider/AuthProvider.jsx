@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
             });
             if(data?.message) return toast.error(data?.message);
             localStorage.setItem("fundCalculator-user", JSON.stringify(data));
-            setUser(JSON.parse(localStorage.getItem("fundCalculator-user")).isUser);
+            setUser(JSON.parse(localStorage.getItem("fundCalculator-user")).user);
             setOrg(JSON.parse(localStorage.getItem("fundCalculator-user")).org_email);
             setLoading(false);
         } catch (error) {
@@ -40,7 +40,7 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         const fuser = localStorage.getItem("fundCalculator-user");
         if (fuser) {
-            setUser(JSON.parse(fuser).isUser);
+            setUser(JSON.parse(fuser).user);
             setOrg(JSON.parse(fuser).org_email);
             setLoading(false);
         } else {

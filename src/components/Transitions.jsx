@@ -1,32 +1,35 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Transition from "./Transition";
 import { useContext, useEffect } from "react";
 import { fetchTransactions } from "../Features/transaction/transactionSlice";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import Loader from "./Loader";
 
 const Transitions = () => {
 
-    const { org:org_email, date } = useContext(AuthContext);
+    const { org: org_email, date } = useContext(AuthContext);
 
     const dispatch = useDispatch();
 
+    const { transactions, isLoading } = useSelector((state) => state.transaction);
+
     useEffect(() => {
-        dispatch(fetchTransactions({date, org_email}))
-    },[dispatch, date, org_email])
+        setTimeout(() => {
+            dispatch(fetchTransactions({ date, org_email }))
+        }, 500);
+    }, [dispatch, date, org_email]);
+
+    if (isLoading) return <Loader></Loader>
+
 
     return (
         <div className="p-4 md:p-6">
             <h4 className="text-center text-xl font-medium border-b pb-1 mb-3">Transactions</h4>
 
             <div className="space-y-2">
-                <Transition></Transition>
-                <Transition></Transition>
-                <Transition></Transition>
-                <Transition></Transition>
-                <Transition></Transition>
-                <Transition></Transition>
-                <Transition></Transition>
-                <Transition></Transition>
+                {
+                    transactions && transactions.map((t) => <Transition data={t} key={t._id}></Transition>)
+                }
             </div>
         </div>
     );
