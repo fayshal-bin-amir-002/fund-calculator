@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
-import { addedTransaction } from "../Features/transaction/transactionSlice";
+import { addedTransaction, editedTransaction } from "../Features/transaction/transactionSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { editInActive } from "../Features/editFund/editFundSlice";
 
@@ -29,10 +29,10 @@ const Form = () => {
     const handleFundFormUpdate = (e) => {
         e.preventDefault();
         const trans = {
-            text, type, amount: Number(amount)
+            text, type, amount: Number(amount), id: fund?._id
         }
 
-        console.log(trans);
+        dispatch(editedTransaction({ date, org_email, trans, email:user?.email }))
 
         handleReset();
     }

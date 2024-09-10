@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { addTransactions, getTransactions } from "./transactionApi"
+import { addTransactions, editTransactions, getTransactions } from "./transactionApi"
 
 const initialState = {
     transactions: [],
@@ -18,6 +18,13 @@ export const fetchTransactions = createAsyncThunk("transaction/fetchTransactions
 export const addedTransaction = createAsyncThunk("transaction/addedTransaction",
     async ({ date, org_email, trans, email }) => {
         const transaction = await addTransactions({ date, org_email, trans, email });
+        return transaction;
+    }
+)
+
+export const editedTransaction = createAsyncThunk("transaction/editedTransaction",
+    async ({ date, org_email, trans, email }) => {
+        const transaction = await editTransactions({ date, org_email, trans, email });
         return transaction;
     }
 )
@@ -52,6 +59,24 @@ const transactionSlice = createSlice({
                 state.transactions.push(action.payload)
             })
             .addCase(addedTransaction.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isError = true;
+                state.error = action.error?.message;
+            })
+            .addCase(editedTransaction.pending, (state) => {
+                state.error = ''
+                state.isError = false;
+                state.isLoading = true;
+            })
+            .addCase(editedTransaction.fulfilled, (state, action) => {
+                state.isLoading = false;
+                const indexToUpdate = state.transactions.findIndex(
+                    (t) => t._id === action.payload._id
+                );
+
+                state.transactions[indexToUpdate] = action.payload;
+            })
+            .addCase(editedTransaction.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.error = action.error?.message;
