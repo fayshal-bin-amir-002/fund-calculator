@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import { MdAttachMoney } from "react-icons/md";
 import "react-datepicker/dist/react-datepicker.css";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Balance = () => {
 
+    const { setDate } = useContext(AuthContext);
+
     const [startDate, setStartDate] = useState(new Date());
+
+    useEffect(() => {
+        let month = startDate.getMonth() + 1;
+        let year = startDate.getFullYear();
+        let date = `${month}/${year}`;
+        setDate(date);
+    },[startDate, setDate]);
 
     return (
         <div className="bg-sky-200 p-4 md:p-6">

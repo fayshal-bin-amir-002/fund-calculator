@@ -1,8 +1,14 @@
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+
 const Form = () => {
+
+    const { user } = useContext(AuthContext);
 
     const handleFundForm = (e) => {
         e.preventDefault();
         console.log('hi');
+        
     }
 
     return (
@@ -29,10 +35,12 @@ const Form = () => {
                         </div>
                     </div>
                 </div>
-                <div className="flex justify-between items-center gap-6">
-                    <input className="w-full p-3 bg-red-200 text-lg font-medium rounded-lg hover:scale-105 duration-500 text-center cursor-pointer focus:outline-none focus:border-0 focus:ring-0 hover:bg-red-400" readOnly defaultValue={'Reset'} />
-                    <button type="submit" className="w-full p-3 bg-sky-200 text-lg font-medium rounded-lg hover:scale-105 duration-500 hover:bg-sky-400">Add Fund</button>
-                </div>
+                {
+                    user?.role === "admin" && <div className="flex justify-between items-center gap-6">
+                        <input className="w-full p-3 bg-red-200 text-lg font-medium rounded-lg hover:scale-105 duration-500 text-center cursor-pointer focus:outline-none focus:border-0 focus:ring-0 hover:bg-red-400" readOnly defaultValue={'Reset'} />
+                        <button type="submit" className="w-full p-3 bg-sky-200 text-lg font-medium rounded-lg hover:scale-105 duration-500 hover:bg-sky-400">Add Fund</button>
+                    </div>
+                }
             </form>
         </div>
     );

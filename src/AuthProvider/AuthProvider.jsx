@@ -8,6 +8,8 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null);
+    const [org, setOrg] = useState(null);
+    const [date, setDate] = useState(null);
     const [loading, setLoading] = useState(true);
 
     const userLogin = async (org_email, email) => {
@@ -18,7 +20,8 @@ const AuthProvider = ({ children }) => {
             });
             if(data?.message) return toast.error(data?.message);
             localStorage.setItem("fundCalculator-user", JSON.stringify(data));
-            setUser(JSON.parse(localStorage.getItem("fundCalculator-user")));
+            setUser(JSON.parse(localStorage.getItem("fundCalculator-user")).isUser);
+            setOrg(JSON.parse(localStorage.getItem("fundCalculator-user")).org_email);
             setLoading(false);
         } catch (error) {
             setLoading(false);
@@ -26,11 +29,19 @@ const AuthProvider = ({ children }) => {
         }
     }
 
+    const userLogout = () => {
+        setLoading(true);
+        localStorage.removeItem("fundCalculator-user");
+        setUser(null);
+        setLoading(false);
+    }
+
     useEffect(() => {
         setLoading(true);
         const fuser = localStorage.getItem("fundCalculator-user");
         if (fuser) {
-            setUser(JSON.parse(fuser));
+            setUser(JSON.parse(fuser).isUser);
+            setOrg(JSON.parse(fuser).org_email);
             setLoading(false);
         } else {
             setUser(null);
@@ -38,7 +49,15 @@ const AuthProvider = ({ children }) => {
         }
     }, [])
 
-    const authData = { user, loading, userLogin }
+    useEffect(() => {
+        const startDate = new Date();
+        let month = startDate.getMonth() + 1;
+        let year = startDate.getFullYear();
+        let date = `${month}/${year}`;
+        setDate(date);
+    },[]);
+
+    const authData = { user, org, date, setDate, loading, userLogin, userLogout }
 
     return (
         <AuthContext.Provider value={authData}>
