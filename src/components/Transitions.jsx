@@ -19,18 +19,19 @@ const Transitions = () => {
         }, 500);
     }, [dispatch, date, org_email]);
 
-    if (isLoading) return <Loader></Loader>
-
-
     return (
         <div className="p-4 md:p-6">
             <h4 className="text-center text-xl font-medium border-b pb-1 mb-3">Transactions</h4>
 
-            <div className="space-y-2">
-                {
-                    transactions && transactions.map((t, i) => <Transition data={t} i={i} key={t._id}></Transition>)
-                }
-            </div>
+            {
+                isLoading ? <Loader></Loader> :
+                    <div className="space-y-2">
+                        {
+                            transactions && transactions.map((t, i) => <Transition data={t} i={i} key={t._id}></Transition>)
+                        }
+                    </div>
+            }
+
         </div>
     );
 };

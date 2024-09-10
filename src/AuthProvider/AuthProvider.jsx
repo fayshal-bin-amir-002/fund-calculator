@@ -15,7 +15,7 @@ const AuthProvider = ({ children }) => {
     const userLogin = async (org_email, email) => {
         try {
             setLoading(true);
-            const { data } = await axios.post("http://localhost:3000/login", {
+            const { data } = await axios.post("https://fund-calculator-server-side.vercel.app/login", {
                 org_email, email
             });
             if(data?.message) return toast.error(data?.message);
