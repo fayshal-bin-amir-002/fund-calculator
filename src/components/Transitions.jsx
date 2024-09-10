@@ -28,7 +28,7 @@ const Transitions = () => {
 
             <div className="space-y-2">
                 {
-                    transactions && transactions.map((t) => <Transition data={t} key={t._id}></Transition>)
+                    transactions && transactions.map((t, i) => <Transition data={t} i={i} key={t._id}></Transition>)
                 }
             </div>
         </div>
